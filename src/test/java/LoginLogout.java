@@ -58,6 +58,7 @@ public class LoginLogout {
         }else{
             System.out.println("Logging out failed");
         }
+        System.out.println("Bye");
 
 
 
