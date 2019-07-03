@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginLogout {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         WebDriverManager.chromedriver().setup();   //setting chromedriver properties with WebDriverManager
         WebDriver driver = new ChromeDriver();    //creating driver object
@@ -27,20 +27,16 @@ public class LoginLogout {
 
         //Step3: input valid password for store manager
         WebElement passField = driver.findElement(By.id("prependedInput2"));//creating WebElement for password
-        passField.sendKeys("UserUser123");                  //sending password
+        passField.sendKeys("UserUser123"+Keys.ENTER);                  //sending password
 
         //Step4: click on "Log in" Button
-        driver.findElement(By.id("_submit")).click(); //finding Login button and clicking
+       // driver.findElement(By.id("_submit")).click(); //finding Login button and clicking
 
         Utility.waitTime(5000);//5s waiting time to load page
 
         //verify logged in successfully
         String dashboardTitle = driver.getTitle();
-        if (!dashboardTitle.equals(loginTitle1)) {
-            System.out.println("Logging in successfully");
-        } else {
-            System.out.println("Logging in failed");
-        }
+        System.out.println(dashboardTitle.equals(loginTitle1)? "Logging in failed":"Logging in successfully");
 
         //Step5: Click on the name on the left top corner of the page
         driver.findElement(By.xpath("//a[contains(text(),'Alex Jones')]")).click(); //finding name element on right top corner
@@ -51,13 +47,8 @@ public class LoginLogout {
         driver.findElement(By.xpath("//a[@class='no-hash']")).click();            //finding Logout element and clicking
 
         //Step7: verify Logged out successfully
-        String loginTitle2 = driver.getTitle();
-        if (loginTitle1.equals(loginTitle2)) {
-            System.out.println("Logging out successfully");
-        } else {
-            System.out.println("Logging out failed");
+
+        WebElement logIn = driver.findElement(By.id("_submit"));
+        System.out.println(logIn.isDisplayed()? "Logging out successfully" : "Logging out failed");
         }
-
-
     }
-}
