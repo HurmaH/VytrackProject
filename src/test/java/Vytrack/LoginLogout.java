@@ -1,3 +1,5 @@
+package Vytrack;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.By;
@@ -39,7 +41,8 @@ public class LoginLogout {
         System.out.println(dashboardTitle.equals(loginTitle1)? "Logging in failed":"Logging in successfully");
 
         //Step5: Click on the name on the left top corner of the page
-        driver.findElement(By.xpath("//a[contains(text(),'Alex Jones')]")).click(); //finding name element on right top corner
+        driver.findElement(By.id("user-menu")).click();//
+        // xpath("//a[contains(text(),'Alex Jones')]")).click(); //finding name element on right top corner
 
         Utility.waitTime(3000);//3s waiting time to load page
 
